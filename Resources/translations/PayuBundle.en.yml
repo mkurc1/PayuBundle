@@ -1,0 +1,5 @@
+success:
+    flash: "Payment has been approved!"
+
+error:
+    flash: "The payment has been interrupted."

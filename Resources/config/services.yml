@@ -1,0 +1,15 @@
+services:
+    payu.client:
+        class: PayuBundle\Client\Client
+        arguments:
+            - @doctrine.orm.entity_manager
+            - @request_stack
+            - @router
+            - @logger
+            - "%payu.pos_id%"
+            - "%payu.signature_key%"
+            - "%payu.environment%"
+            - %payu.class.request%
+            - "%payu.cipher%"
+        tags:
+            - { name: monolog.logger, channel: payu }

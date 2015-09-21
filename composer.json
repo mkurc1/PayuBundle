@@ -1,0 +1,35 @@
+{
+    "name": "mkurc1/payu-bundle",
+    "type": "symfony-bundle",
+    "description": "Symfony PayuBundle",
+    "keywords": [
+        "payu",
+        "payment",
+        "ecommerce"
+    ],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Michał Kurcewicz",
+            "email": "mkurc1@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.1",
+        "symfony/config": "~2.3",
+        "symfony/translation": "~2.3",
+        "symfony/http-foundation": "~2.3",
+        "symfony/property-access": "~2.3",
+        "openpayu/openpayu": "^2.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Mkurc1\\PayuBundle\\": ""
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        }
+    }
+}

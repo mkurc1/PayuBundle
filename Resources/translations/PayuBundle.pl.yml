@@ -1,0 +1,5 @@
+success:
+    flash: "Płatność została zatwierdzona!"
+
+error:
+    flash: "Płatność została przerwana."
