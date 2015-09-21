@@ -24,7 +24,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Mkurc1\\PayuBundle\\": ""
+            "PayuBundle\\": ""
         }
     },
     "minimum-stability": "stable",
