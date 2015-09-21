@@ -32,7 +32,7 @@ Create your Order class and implement OrderInterface:
     use PayuBundle\Entity\OrderInterface;
     
     /**
-     * @ORM\Table("subscription")
+     * @ORM\Table("payu_order")
      * @ORM\Entity()
      */
     class Order implements OrderInterface
@@ -81,7 +81,7 @@ Create your PayuOrderRequest class:
     use PayuBundle\Entity\PayuOrderRequest as AbstractPayuOrderRequest;
     
     /**
-     * @ORM\Table("payu_order_request")
+     * @ORM\Table("payu_request")
      * @ORM\Entity()
      */
     class PayuOrderRequest extends AbstractPayuOrderRequest
@@ -128,6 +128,46 @@ Configure your application:
         environment: secure
         pos_id: 145227
         signature_key: 13a980d4f851f3d9a1cfc792fb1f5e50
+
+Configure your routing:
+
+    # app/config/routing.yml
+    payu:
+        resource: "@PayuBundle/Controller/"
+        type:     annotation
+    
+Create your Controller:
+
+    <?php
+
+    namespace AppBundle\Controller;
+    
+    use AppBundle\Entity\Order;
+    use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+    use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+    
+    /**
+     * @Route("/order")
+     */
+    class OrderController extends Controller
+    {
+        /**
+         * @Route("/pay/{order}")
+         * @Method("GET")
+         */
+        public function payAction(Order $order)
+        {
+            $payRequest = $this->get('payu.client')->createRequest($order);
+    
+            return $this->redirect($payRequest->getResponse()->redirectUri);
+        }
+    }
+    
+Update your database schema:
+
+    $ php app/console doctrine:schema:update --force
+    
+You now can use your payment system!
     
 ## License
 
