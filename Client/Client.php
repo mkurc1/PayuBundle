@@ -4,6 +4,7 @@ namespace PayuBundle\Client;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityNotFoundException;
+use PayuBundle\Exception\NotPriceDefinedException;
 use OpenPayU_Configuration;
 use OpenPayU_Order;
 use PayuBundle\Entity\OrderInterface;
@@ -73,6 +74,10 @@ class Client
 
     public function createRequest(OrderInterface $order)
     {
+        if (!$order->getTotalPrice()) {
+            throw new NotPriceDefinedException;
+        }
+
         $request = $this->setDataToRequest($order);
 
         return OpenPayU_Order::create($request);
